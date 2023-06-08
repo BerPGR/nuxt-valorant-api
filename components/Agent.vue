@@ -3,10 +3,10 @@
 <template>
     <div class="container">
         <div class="agent-container">
-            <img class="agent-img" :src="agent.fullPortrait" alt="">
+            <img class="agent-img" :src="agentImage" alt="">
         </div>
         <div class="agent-info-container">
-            <h2>{{ agent.displayName }}</h2>
+            <h2>{{ agentName }}</h2>
             <button>
                 <i class="fas fa-chevron-down"></i>
             </button>
@@ -18,12 +18,9 @@
 
 export default {
   name: 'AgentComponent',
-  data: () => ({
-    agent: {}
-  }),
-  async fetch () {
-    const agent = await this.$axios.get('https://valorant-api.com/v1/agents/e370fa57-4757-3604-3648-499e1f642d3f')
-    this.agent = await agent.data.data
+  props: {
+    agentName: String,
+    agentImage: String
   }
 }
 </script>
@@ -34,10 +31,11 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 5px
 }
 .agent-container {
     border: 2px solid white;
-    width: 260px;
+    width: 280px;
     height: 470px;
 }
 
@@ -48,7 +46,7 @@ export default {
 }
 
 .agent-info-container {
-    width: 260px;
+    width: 280px;
     height: 120px;
     background-color: white;
     text-align: center;
@@ -62,6 +60,7 @@ export default {
 button {
     border: none;
     cursor: pointer;
+    background-color: transparent;
 }
 
 i {

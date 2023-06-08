@@ -1,17 +1,43 @@
 <template>
   <div class="container">
-    <h1 class="title-container">Welcome to this website!</h1>
-    <div class="second-title-container">
-      <img class="second-title-img" src="https://media.valorant-api.com/agents/e370fa57-4757-3604-3648-499e1f642d3f/killfeedportrait.png" alt="">
-      <h1 class="second-title-content">Here you can see about some Valorant info!</h1>
+
+    <div class="first-section">
+      <h1 class="title-container">Welcome to this website!</h1>
+      <div class="second-title-container">
+        <img class="second-title-img" src="https://media.valorant-api.com/agents/e370fa57-4757-3604-3648-499e1f642d3f/killfeedportrait.png" alt="">
+        <h1 class="second-title-content">Here you can see about some Valorant info!</h1>
+      </div>
+      <i class="fas fa-chevron-down" :style="{color: 'white', fontSize: '40px', cursor: 'pointer'}" @click="scrollToSecondDiv"></i>
     </div>
-    <i class="fas fa-chevron-down" :style="{color: 'white', fontSize: '40px', cursor: 'pointer'}"></i>
+
+    <div class="second-section">
+      <h1 class="second-section-title">Check out some of the agents</h1>
+      <div class="agents-container">
+        <div v-for="(agent, i) in agents" :key="i">
+          <Agent :agentName="agent.displayName" :agentImage="agent.fullPortrait"/>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import VueScrollTo from 'vue-scrollto'
+
 export default {
-  name: 'IndexPage'
+  name: 'IndexPage',
+  async fetch () {
+    const agents = await this.$axios.get('https://valorant-api.com/v1/agents?isPlayableCharacter=true')
+    this.agents = agents.data.data
+  },
+  data: () => ({
+    agents: []
+  }),
+  methods: {
+    scrollToSecondDiv () {
+      VueScrollTo.scrollTo('.second-section', 1000)
+    }
+  }
 }
 </script>
 
@@ -23,8 +49,8 @@ export default {
   font-family: 'Valorant', sans-serif;
 }
 
-.container {
-  height: 100vh;
+.first-section {
+  min-height: 100vh;
   background-color: #101823;
   color: #F24153;
   text-align: center;
@@ -50,6 +76,25 @@ export default {
 
 .second-title-img {
   height: 100px;
+}
+
+.second-section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #888;
+  text-align: center;
+}
+
+.second-section-title {
+  padding-top: 50px
+}
+
+.agents-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 @keyframes fade-in {
