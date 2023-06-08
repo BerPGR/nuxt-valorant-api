@@ -6,7 +6,7 @@
             <img class="agent-img" :src="agent.fullPortrait" alt="">
         </div>
         <div class="agent-info-container">
-            <h2 class="custom-font">{{ agent.displayName }}</h2>
+            <h2>{{ agent.displayName }}</h2>
             <button>
                 <i class="fas fa-chevron-down"></i>
             </button>
@@ -29,9 +29,6 @@ export default {
 </script>
 
 <style scoped>
-.custom-font {
-    font-family: 'Valorant', sans-serif;
-}
 
 .container {
     display: flex;
