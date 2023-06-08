@@ -1,5 +1,7 @@
 <template>
-  <div class="">Funcionando</div>
+  <div class="container">
+    <Agent />
+  </div>
 </template>
 
 <script>
@@ -13,5 +15,9 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+.container {
+  height: 100vh;
+  background-color: #888;
 }
 </style>
