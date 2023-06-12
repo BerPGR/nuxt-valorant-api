@@ -31,7 +31,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 5px
+    margin: 15px
 }
 .agent-container {
     border: 2px solid white;
