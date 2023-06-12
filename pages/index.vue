@@ -14,10 +14,12 @@
       <h1 class="second-section-title">Check out some of the agents</h1>
       <div class="agents-container">
         <div v-for="(agent, i) in agents" :key="i">
-          <Agent :agentName="agent.displayName" :agentImage="agent.fullPortrait"/>
+          <Agent :agentName="agent.displayName" :agentImage="agent.fullPortrait" :scrollToAgent="goToAgentSection"/>
         </div>
       </div>
     </div>
+
+    <div class="selected-agent-section" v-if="toogleAgentSection === true"></div>
   </div>
 </template>
 
@@ -28,14 +30,20 @@ export default {
   name: 'IndexPage',
   async fetch () {
     const agents = await this.$axios.get('https://valorant-api.com/v1/agents?isPlayableCharacter=true')
-    this.agents = agents.data.data
+    this.agents = await agents.data.data
   },
   data: () => ({
-    agents: []
+    agents: [],
+    toogleAgentSection: false
   }),
   methods: {
     scrollToSecondDiv () {
       VueScrollTo.scrollTo('.second-section', 1000)
+    },
+
+    goToAgentSection () {
+      this.toogleAgentSection = true
+      VueScrollTo.scrollTo('.selected-agent-section', 700)
     }
   }
 }
@@ -95,6 +103,11 @@ export default {
   align-items: center;
   justify-content: space-evenly;
   flex-wrap: wrap;
+}
+
+.selected-agent-section {
+  min-height: 100vh;
+  background-color: #101823;
 }
 
 @keyframes fade-in {

@@ -8,7 +8,7 @@
         <div class="agent-info-container">
             <h2>{{ agentName }}</h2>
             <button>
-                <i class="fas fa-chevron-down"></i>
+                <i class="fas fa-chevron-down" @click="scrollToAgent()"></i>
             </button>
         </div>
     </div>
@@ -20,7 +20,8 @@ export default {
   name: 'AgentComponent',
   props: {
     agentName: String,
-    agentImage: String
+    agentImage: String,
+    scrollToAgent: Function
   }
 }
 </script>
