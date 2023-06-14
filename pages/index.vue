@@ -11,15 +11,20 @@
     </div>
 
     <div class="second-section">
-      <h1 class="second-section-title">Check out some of the agents</h1>
+      <h1 class="second-section-title">Check out all the agents</h1>
       <div class="agents-container">
         <div v-for="(agent, i) in agents" :key="i">
-          <Agent :agentName="agent.displayName" :agentImage="agent.fullPortrait" :scrollToAgent="goToAgentSection"/>
+          <Agent :agentName="agent.displayName" :agentImage="agent.fullPortrait" :scrollToAgent="toogleSection"/>
         </div>
       </div>
     </div>
 
-    <div class="selected-agent-section" v-if="toogleAgentSection === true"></div>
+    <div class="selected-agent-section" v-if="toogleAgentSection === true">
+      <div class="back-button" @click="returnSecondSection">
+        <i class="fas fa-chevron-left" :style="{color: 'white', fontSize: '24px'}"></i>
+        <h3 :style="{color: '#F24153', marginLeft: '10px'}">Go back</h3>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -32,6 +37,11 @@ export default {
     const agents = await this.$axios.get('https://valorant-api.com/v1/agents?isPlayableCharacter=true')
     this.agents = await agents.data.data
   },
+  watch: {
+    toogleAgentSection (newValue) {
+      console.log(this.toogleAgentSection, newValue)
+    }
+  },
   data: () => ({
     agents: [],
     toogleAgentSection: false
@@ -41,9 +51,14 @@ export default {
       VueScrollTo.scrollTo('.second-section', 1000)
     },
 
-    goToAgentSection () {
+    toogleSection () {
       this.toogleAgentSection = true
-      VueScrollTo.scrollTo('.selected-agent-section', 700)
+      VueScrollTo.scrollTo('.selected-agent-section', 1200)
+    },
+
+    returnSecondSection () {
+      VueScrollTo.scrollTo('.second-section', 1000)
+      this.toogleAgentSection = false
     }
   }
 }
@@ -90,12 +105,12 @@ export default {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #888;
+  background-color: #F24153;
   text-align: center;
 }
 
 .second-section-title {
-  padding-top: 50px
+  padding-top: 30px;
 }
 
 .agents-container {
@@ -108,6 +123,14 @@ export default {
 .selected-agent-section {
   min-height: 100vh;
   background-color: #101823;
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding-top: 20px;
+  padding-left: 20px;
 }
 
 @keyframes fade-in {

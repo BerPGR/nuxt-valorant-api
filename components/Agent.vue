@@ -58,6 +58,10 @@ export default {
     box-shadow: 0px 10px 15px #444;
 }
 
+h2 {
+    padding-top: 10px;
+}
+
 button {
     border: none;
     cursor: pointer;
