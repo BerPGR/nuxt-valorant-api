@@ -3,12 +3,12 @@
 <template>
     <div class="container">
         <div class="agent-container">
-            <img class="agent-img" :src="agentImage" alt="">
+            <img class="agent-img" :src="fullAgent.fullPortrait" alt="">
         </div>
         <div class="agent-info-container">
-            <h2>{{ agentName }}</h2>
+            <h2>{{ fullAgent.displayName }}</h2>
             <button>
-                <i class="fas fa-chevron-down" @click="scrollToAgent()"></i>
+                <i class="fas fa-chevron-down" @click="scrollToAgent(fullAgent)"></i>
             </button>
         </div>
     </div>
@@ -19,8 +19,7 @@
 export default {
   name: 'AgentComponent',
   props: {
-    agentName: String,
-    agentImage: String,
+    fullAgent: Object,
     scrollToAgent: Function
   }
 }

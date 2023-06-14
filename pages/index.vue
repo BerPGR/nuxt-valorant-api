@@ -14,7 +14,7 @@
       <h1 class="second-section-title">Check out all the agents</h1>
       <div class="agents-container">
         <div v-for="(agent, i) in agents" :key="i">
-          <Agent :agentName="agent.displayName" :agentImage="agent.fullPortrait" :scrollToAgent="toogleSection"/>
+          <Agent :fullAgent="agent" :scrollToAgent="toogleSection"/>
         </div>
       </div>
     </div>
@@ -44,6 +44,7 @@ export default {
   },
   data: () => ({
     agents: [],
+    agent: {},
     toogleAgentSection: false
   }),
   methods: {
@@ -51,8 +52,9 @@ export default {
       VueScrollTo.scrollTo('.second-section', 1000)
     },
 
-    toogleSection () {
+    toogleSection (agent) {
       this.toogleAgentSection = true
+      console.log(agent)
       VueScrollTo.scrollTo('.selected-agent-section', 1200)
     },
 
@@ -123,6 +125,8 @@ export default {
 .selected-agent-section {
   min-height: 100vh;
   background-color: #101823;
+  display: flex;
+  flex-direction: column;
 }
 
 .back-button {
