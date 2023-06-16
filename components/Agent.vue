@@ -7,8 +7,8 @@
         </div>
         <div class="agent-info-container">
             <h2>{{ fullAgent.displayName }}</h2>
-            <button>
-                <i class="fas fa-chevron-down" @click="scrollToAgent(fullAgent)"></i>
+            <button @click="scrollToAgent(fullAgent)">
+                <i class="fas fa-chevron-down"></i>
             </button>
         </div>
     </div>
