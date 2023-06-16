@@ -24,6 +24,7 @@
         <i class="fas fa-chevron-left" :style="{color: 'white', fontSize: '24px'}"></i>
         <h3 :style="{color: '#F24153', marginLeft: '10px'}">Go back</h3>
       </div>
+      <AgentInfo :info="agent"/>
     </div>
   </div>
 </template>
@@ -54,12 +55,13 @@ export default {
 
     toogleSection (agent) {
       this.toogleAgentSection = true
-      console.log(agent)
+      this.agent = agent
       VueScrollTo.scrollTo('.selected-agent-section', 1200)
     },
 
     returnSecondSection () {
       VueScrollTo.scrollTo('.second-section', 1000)
+      this.agent = {}
       this.toogleAgentSection = false
     }
   }

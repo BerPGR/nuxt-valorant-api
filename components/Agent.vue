@@ -2,7 +2,7 @@
 
 <template>
     <div class="container">
-        <div class="agent-container">
+        <div class="agent-container" :style="{backgroundImage: 'url(' + fullAgent.background +')'}">
             <img class="agent-img" :src="fullAgent.fullPortrait" alt="">
         </div>
         <div class="agent-info-container">
@@ -26,25 +26,24 @@ export default {
 </script>
 
 <style scoped>
-
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 15px
+    margin: 15px;
 }
 .agent-container {
     border: 2px solid white;
     width: 280px;
     height: 470px;
+    background-repeat: no-repeat;
+    background-size: contain;
 }
-
 .agent-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
-
 .agent-info-container {
     width: 280px;
     height: 120px;
