@@ -1,6 +1,6 @@
 <template>
   <div class="agent-info-container">
-    <div class="agent-image-container" @click="showInfo">
+    <div class="agent-image-container" :style="{backgroundImage: 'url('+ info.background +')'}">
         <img :src="info.fullPortrait" class="agent-image"/>
     </div>
     <div class="agent-info">
@@ -9,10 +9,13 @@
       <p class="agent-info-description">{{ info.description }}</p>
       <h1 class="agent-info-abilitites">Abilities</h1>
       <div class="agent-abilities-container">
-        <div class="agent-ability" v-for="(ability, i) in info.abilities" :key="i">
+        <div class="agent-ability" v-for="(ability, i) in info.abilities" :key="i" @click="toogleAbilityDescription(ability.description)">
           <img :src="ability.displayIcon" alt="" class="agent-ability-icon">
-          <p :style="{color: '#F24153', textAlign: 'center', paddingTop: '20px'}">{{ ability.displayName }}</p>
+          <p class="agent-ability-name">{{ ability.displayName }}</p>
         </div>
+      </div>
+      <div class="agent-ability-description" v-if="abilityDescription == true">
+        <p>{{ description }}</p>
       </div>
     </div>
   </div>
@@ -24,9 +27,14 @@ export default {
   props: {
     info: Object
   },
+  data: () => ({
+    abilityDescription: false,
+    description: ''
+  }),
   methods: {
-    showInfo () {
-      console.log(this.info.fullPortrait)
+    toogleAbilityDescription (desc) {
+      this.abilityDescription = true
+      this.description = desc
     }
   }
 }
@@ -43,6 +51,8 @@ export default {
     width: 300px;
     height: 560px;
     border: none;
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
 .agent-image {
@@ -91,12 +101,36 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-right: 15px;
   cursor: pointer;
+  margin-left: 15px;
 }
 
 .agent-ability-icon {
   height: 50px;
   object-fit: cover;
+}
+
+.agent-ability-name {
+  color: #F24153;
+  text-align: center;
+  padding-top: 20px;
+  animation: fade-in 1s ease-in forwards
+}
+
+.agent-ability-description {
+  text-align: center;
+  color: white;
+  margin-top: 20px;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 </style>
