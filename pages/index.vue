@@ -139,6 +139,22 @@ export default {
   padding-left: 20px;
 }
 
+@media screen and (max-width: 480px) {
+  .title-container {
+    text-align: center;
+    width: 100%;
+    padding: 0;
+  }
+
+  .second-title-container {
+    flex-direction: column;
+  }
+
+  .second-title-content {
+    margin-top: 20px;
+  }
+}
+
 @keyframes fade-in {
   0% {
     opacity: 0;

@@ -114,7 +114,6 @@ export default {
   color: #F24153;
   text-align: center;
   padding-top: 20px;
-  animation: fade-in 1s ease-in forwards
 }
 
 .agent-ability-description {
@@ -123,14 +122,42 @@ export default {
   margin-top: 20px;
 }
 
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
+@media screen and (max-width: 768px) {
+  .agent-image-container {
+    width: 100%;
+    height: 100%;
   }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
+  .agent-info-container {
+    flex-direction: column;
+    text-align: center;
+    padding: 0;
+    align-items: center;
+  }
+
+  .agent-info {
+    width: 100%;
+  }
+
+  .agent-abilities-container {
+    flex-direction: column;
+  }
+
+  .agent-info-description {
+    padding: 0 20px;
+  }
+
+  .agent-ability {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+
+  .agent-ability-name {
+    padding-top: 10px;
+  }
+
+  .agent-ability-description {
+    padding: 0 20px;
   }
 }
+
 </style>
